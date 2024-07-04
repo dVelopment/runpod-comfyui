@@ -32,6 +32,7 @@ then
     echo "Skipping auto-start of webui"
 else
     echo "Started webui through relauncher script"
+    source /workspace/web-ui/venv/bin/activate
     cd /workspace/web-ui/stable-diffusion-webui
     python relauncher.py &
 fi
