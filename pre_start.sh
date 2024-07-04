@@ -8,6 +8,8 @@ rsync -au --remove-source-files /ComfyUI/ /workspace/ComfyUI/
 cd /workspace/ComfyUI
 python main.py --listen --port 3000 &
 
+mkdir -p /workspace/web-ui
+
 echo "**** syncing venv to workspace, please wait. This could take a while on first startup! ****"
 rsync --remove-source-files -rlptDu --ignore-existing /web-ui/venv/ /workspace/web-ui/venv/
 
