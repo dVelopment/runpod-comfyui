@@ -13,6 +13,14 @@ install_dir="/workspace/web-ui"
 export COMMANDLINE_ARGS="--port 4000 --xformers --skip-install --listen --enable-insecure-extension-access"
 #export XFORMERS_PACKAGE="xformers==0.0.17.dev447"
 
+# add custom models directories to COMMANDLINE_ARGS
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --cpkt-dir /workspace/models/Stable-diffusion"
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --embeddings-dir /workspace/embeddings"
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --hypernetwork-dir /workspace/models/hypernetworks"
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --vae-dir /workspace/models/vae"
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --lora-dir /workspace/models/Lora"
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --controlnet-dir /workspace/models/ControlNet"
+
 # python3 executable
 #python_cmd="python3"
 
