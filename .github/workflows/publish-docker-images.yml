@@ -3,7 +3,7 @@ name: Publish docker images
 on:
   push:
     branches:
-      - docker
+      - main
 
 jobs:
   push_to_registry:
@@ -15,6 +15,23 @@ jobs:
       attestations: write
       id-token: write
     steps:
+      - name: check free space
+        run: |
+          echo "Free space":
+          df -h
+
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: "true"
+
+      - name: check free space again
+        run: |
+          echo "Free space":
+          df -h
+
       - name: Checkout code
         uses: actions/checkout@v4
 
