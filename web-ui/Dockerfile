@@ -17,30 +17,27 @@ RUN mkdir -p /workspace/web-ui && \
     cd /workspace/web-ui && python -m venv venv && \
     source /workspace/web-ui/venv/bin/activate && \
     cp /stable-diffusion-webui/requirements.txt /workspace/web-ui/requirements.txt && \
-    python -m pip install -r /workspace/web-ui/requirements.txt
-
-# run install script
-RUN cd /stable-diffusion-webui && \
+    python -m pip install -r /workspace/web-ui/requirements.txt && \
+    # run install script
+    mv /stable-diffusion-webui /workspace/web-ui/stable-diffusion-webui && \
+    cd /workspace/web-ui/stable-diffusion-webui && \
     source /workspace/web-ui/venv/bin/activate && \
     export COMMANDLINE_ARGS="--reinstall-xformers --reinstall-torch --skip-torch-cuda-test" && \
-    python install.py
-
-# clenaup
-RUN mv /workspace/web-ui/venv /venv && \
-    # ensure that the fixed requirements.txt survives
-    mv /workspace/web-ui/requirements.txt /requirements.txt && \
+    python install.py && \
+    # clenaup
+    mv /workspace/web-ui /web-ui && \
     # rm unnecessary models/folders
-    rm -rf /stable-diffusion-webui/models/Stable-diffusion \
-    /stable-diffusion-webui/models/Lora \
-    /stable-diffusion-webui/models/hypernetworks \
-    /stable-diffusion-webui/models/ControlNet \
-    /stable-diffusion-webui/models/VAE \
-    /stable-diffusion-webui/models/VAE-approx \
-    /stable-diffusion-webui/embeddings
+    rm -rf /web-ui/stable-diffusion-webui/models/Stable-diffusion \
+    /web-ui/stable-diffusion-webui/models/Lora \
+    /web-ui/stable-diffusion-webui/models/hypernetworks \
+    /web-ui/stable-diffusion-webui/models/ControlNet \
+    /web-ui/stable-diffusion-webui/models/VAE \
+    /web-ui/stable-diffusion-webui/models/VAE-approx \
+    /web-ui/stable-diffusion-webui/embeddings
 
 # add our relauner.py and webui-user.sh
-COPY web-ui/relauncher.py /stable-diffusion-webui/relauncher.py
-COPY web-ui/webui-user.sh /stable-diffusion-webui/webui-user.sh
+COPY web-ui/relauncher.py /web-ui/stable-diffusion-webui/relauncher.py
+COPY web-ui/webui-user.sh /web-ui/stable-diffusion-webui/webui-user.sh
 
 # add our custom start scripts.sh
 COPY web-ui/pre_start.sh /pre_start.sh

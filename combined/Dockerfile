@@ -7,7 +7,7 @@ COPY comfy-ui/pre_start.sh /pre_start_comfy-ui.sh
 COPY web-ui/pre_start.sh /pre_start_web-ui.sh
 
 # add automatic1111
-COPY --from=web-ui /stable-diffusion-webui /stable-diffusion-webui
+COPY --from=web-ui /web-ui /web-ui
 COPY --from=web-ui /cn-models /cn-models
 
 # add the combined pre_start.sh script

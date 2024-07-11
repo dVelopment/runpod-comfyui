@@ -1,14 +1,14 @@
 
 mkdir -p /workspace/web-ui
 echo "**** syncing venv to workspace, please wait. This could take a while on first startup! ****"
-rsync --remove-source-files -rlptDu --ignore-existing /venv/ /workspace/web-ui/venv/
+rsync --remove-source-files -rlptDu --ignore-existing /web-ui/venv/ /workspace/web-ui/venv/
 
 echo "**** syncing stable diffusion to workspace, please wait ****"
-rsync --remove-source-files -rlptDu --ignore-existing /stable-diffusion-webui/ /workspace/web-ui/stable-diffusion-webui/
+rsync --remove-source-files -rlptDu --ignore-existing /web-ui/stable-diffusion-webui/ /workspace/web-ui/stable-diffusion-webui/
 
 if [[ -f /requirements.txt ]]; then
     echo "moving /requirements.txt to /workspace/web-ui/stable-diffusion-webui/requirements.txt"
-    mv -f /requirements.txt /workspace/web-ui/stable-diffusion-webui/requirements.txt
+    mv -f /web-ui/requirements.txt /workspace/web-ui/stable-diffusion-webui/requirements.txt
 fi
 
 ln -s /cn-models/* /workspace/web-ui/stable-diffusion-webui/extensions/sd-webui-controlnet/models/
