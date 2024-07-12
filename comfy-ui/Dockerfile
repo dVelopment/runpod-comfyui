@@ -7,7 +7,8 @@ RUN rm -rf /comfy-models
 RUN apt-get update && apt-get install -y \
     --no-install-recommends google-perftools \
     build-essential python3.10-dev \
-    python3.10-venv libgl1 libglib2.0-0 bc && \
+    python3.10-venv libgl1 libglib2.0-0 bc \
+    unzip aria2 && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* \ && \
     rm -rf /ComfyUI && mkdir -p /workspace/comfy-ui && \
@@ -51,7 +52,8 @@ RUN cd /workspace/comfy-ui && \
     comfy-image-saver \
     comfyui-dynamicprompts \
     comfyui-prompt-reader-node \
-    mm-comfyui-loopback
+    ComfyUI_InstantID \
+    comfyui-reactor-node
 
 # rm from /workspace
 RUN mv /workspace/comfy-ui /comfy-ui
